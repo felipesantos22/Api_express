@@ -13,4 +13,9 @@ async function createUserService({ name, email }: IUser) {
     return newUser;
 }
 
-export default createUserService;
+async function readUserService() {
+    const readUser = await prisma.user.findMany();
+    return readUser;
+}
+
+export default { createUserService, readUserService };
