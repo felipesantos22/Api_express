@@ -12,5 +12,11 @@ async function readUserontroller(_req: Request, res: Response) {
     return res.status(200).json(readUser);
 }
 
-export default { createUserController, readUserontroller };
+async function deleteUserController(req: Request, res: Response) {
+    const { id } = req.params;
+    await userController.deleteUserService(Number(id));
+    return res.status(200).json({message:"User deleted!"});
+}
+
+export default { createUserController, readUserontroller, deleteUserController };
 

@@ -18,4 +18,13 @@ async function readUserService() {
     return readUser;
 }
 
-export default { createUserService, readUserService };
+async function deleteUserService(id: number) {
+    const deleteUser = await prisma.user.delete({
+        where: {
+            id,
+        }
+    });
+    return deleteUser;
+}
+
+export default { createUserService, readUserService , deleteUserService };
