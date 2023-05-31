@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+// import Joi from "joi";
 
 const validateName = (request: Request, response: Response, next: NextFunction) => {
     const { email, name } = request.body;
@@ -16,4 +17,19 @@ const validateName = (request: Request, response: Response, next: NextFunction) 
     next();
 };
 
-export default validateName;
+// const validateNewUser = (req: Request, res: Response, next: NextFunction) => {
+//     const { error } = Joi.object({
+//         name: Joi.string().min(8).required().messages({
+//             'string.max': '"displayName" length must be at least 8 characters long',
+//         }),
+//         email: Joi.string().email().required().messages({
+//             'string.email': '"email" must be a valid email',
+//         }),
+//     }).validate(req.body);
+
+//     if (error) return res.status(400).json({ message: error.message });
+
+//     next();
+// };
+
+export default { validateName };

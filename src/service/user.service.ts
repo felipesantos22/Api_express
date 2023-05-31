@@ -1,9 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
 import IUser from "../interfaces/user.interface";
 
 const prisma = new PrismaClient();
 
 async function createUserService({ email, name }: IUser) {
+
     const newUser = await prisma.user.create({
         data: {
             email,
@@ -13,9 +14,21 @@ async function createUserService({ email, name }: IUser) {
     return newUser;
 }
 
-async function readUserService() {
+async function readUserService(): Promise<User[]> {
     const readUser = await prisma.user.findMany();
     return readUser;
+}
+
+async function updateUserService({ id, email }: IUser) {
+    const updateUser = await prisma.user.update({
+        where: {
+            id: Number(id),
+        },
+        data: {
+            email,
+        }
+    });
+    return updateUser
 }
 
 async function deleteUserService(id: number) {
@@ -27,4 +40,4 @@ async function deleteUserService(id: number) {
     return deleteUser;
 }
 
-export default { createUserService, readUserService , deleteUserService };
+export default { createUserService, readUserService, updateUserService, deleteUserService };
