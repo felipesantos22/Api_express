@@ -19,10 +19,10 @@ async function readUserService(): Promise<User[]> {
     return readUser;
 }
 
-async function updateUserService({ id, email }: IUser) {
+async function updateUserService(id: number, email: string) {
     const updateUser = await prisma.user.update({
         where: {
-            id: Number(id),
+            id,
         },
         data: {
             email,

@@ -9,8 +9,6 @@ const routerUser = express.Router();
 routerUser.post('/user', validation.validateName, userController.createUserController);
 routerUser.get('/user', userController.readUserController);
 routerUser.delete('/user/:id', userController.deleteUserController);
-routerUser.put('/user/:id', (_req, res) => {
-    res.send("Projeto pleno back-end!")
-});
+routerUser.put('/user/:id', userController.updateUserController);
 
 export default routerUser;
