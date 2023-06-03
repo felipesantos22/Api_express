@@ -12,4 +12,17 @@ async function readPostController(_req: Request, res: Response) {
     return res.status(200).json(readPost);
 }
 
-export default { createPostController, readPostController };
+async function updatePostController(req: Request, res: Response) {
+    const { id } = req.params;
+    const { title, content, published, authorId } = req.body;
+    await postController.updatePostService(Number(id), title, content, published, authorId);
+    return res.status(200).json({ message: "Update successful!" });
+}
+
+async function deletePostController(req: Request, res: Response) {
+    const { id } = req.params;
+    await postController.deletePostService(Number(id));
+    return res.status(200).json({ message: "Post deleted!" });
+}
+
+export default { createPostController, readPostController, updatePostController, deletePostController };

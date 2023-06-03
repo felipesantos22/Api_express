@@ -22,4 +22,29 @@ async function readPostService(): Promise<Post[]> {
     return readPost;
 }
 
-export default { createPostService, readPostService };
+async function updatePostService(id: number, title: string, content: string, published: boolean, authorId: number) {
+    const updatePost = await prisma.post.update({
+        where: {
+            id,
+        },
+        data: {
+            title,
+            content,
+            published,
+            authorId,
+        }
+    });
+    return updatePost;
+}
+
+async function deletePostService(id: number) {
+    const deletePost = await prisma.user.delete({
+        where: {
+            id,
+        }
+    });
+    return deletePost;
+}
+
+
+export default { createPostService, readPostService, updatePostService, deletePostService, };
