@@ -15,8 +15,13 @@ async function readPostController(_req: Request, res: Response) {
 async function updatePostController(req: Request, res: Response) {
     const { id } = req.params;
     const { title, content, published, authorId } = req.body;
-    await postController.updatePostService(Number(id), title, content, published, authorId);
-    return res.status(200).json({ message: "Update successful!" });
+    try {
+        await postController.updatePostService(Number(id), title, content, published, authorId);
+        return res.status(200).json({ message: "Update successful!" });
+    } catch (error) {
+        return res.status(400).json({ message: "Not successful!" });
+    }
+
 }
 
 async function deletePostController(req: Request, res: Response) {
