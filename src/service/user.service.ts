@@ -15,17 +15,22 @@ async function createUserService({ email, name }: IUser) {
 }
 
 async function readUserService(): Promise<User[]> {
-    const readUser = await prisma.user.findMany();
+    const readUser = await prisma.user.findMany({
+        include:{
+            posts: true,
+        }
+    });
     return readUser;
 }
 
-async function updateUserService(id: number, email: string) {
+async function updateUserService(id: number, email: string, name: string) {
     const updateUser = await prisma.user.update({
         where: {
             id,
         },
         data: {
             email,
+            name,
         }
     });
     return updateUser

@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import userController from "../service/user.service";
-import IUser from "../interfaces/user.interface";
 
 async function createUserController(req: Request, res: Response) {
     const { email, name } = req.body;
@@ -15,9 +14,9 @@ async function readUserController(_req: Request, res: Response) {
 
 async function updateUserController(req: Request, res: Response) {
     const { id } = req.params;
-    const { email } = req.body;
-    const readUser = await userController.updateUserService(Number(id), email);
-    return res.status(200).json(readUser);
+    const { email, name } = req.body;
+    await userController.updateUserService(Number(id), email, name);
+    return res.status(200).json({message:"Update successful!"});
 }
 
 async function deleteUserController(req: Request, res: Response) {
